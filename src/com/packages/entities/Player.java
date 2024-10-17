@@ -1,6 +1,7 @@
 package com.mypackage
+import com.packages.entities.Entities
 
-public class Player {
+public class Player extends Entities {
 
 	int pv;
 	int attack;
