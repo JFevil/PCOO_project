@@ -3,6 +3,7 @@ import com.packages.entities.Entities;
 import com.packages.weapons.Weapons;
 import com.packages.equipment.Equipment;
 
+
 public class Player extends Entities {
 
 	Weapons[] weapons;
