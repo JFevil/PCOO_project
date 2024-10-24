@@ -1,6 +1,6 @@
 package com.packages.entities;
 
-public class Entities {
+public abstract class Entities {
 
 	private int positionX;
 	private int positionY;
@@ -8,14 +8,16 @@ public class Entities {
 	int attack;
 	int speed;
 	int resistance;
+	double orientation;
 
-	public Entities(int positionX, int positionY, int hP, int attack, int speed, int resistance) {
+	public Entities(int positionX, int positionY, int hP, int attack, int speed, int resistance, double orientation) {
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.hP = hP;
 		this.attack = attack;
 		this.speed = speed;
 		this.resistance = resistance;
+		this.orientation = orientation;
 	}
 
 	public void mouv(int mouvX, int mouvY) {
