@@ -1,6 +1,5 @@
 package com.packages.map;
-import com.packages.entities.Player;
-import com.packages.entities.Monster;
+import com.packages.entities.Entities;
 
 public class Map {
 
