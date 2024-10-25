@@ -20,6 +20,10 @@ public abstract class Entities {
 		this.orientation = orientation;
 	}
 
+	private int trajectory() {
+		return 0;
+	}
+
 	public void mouv(int mouvX, int mouvY) {
 		this.positionX += mouvX;
 		this.positionY += mouvY;
