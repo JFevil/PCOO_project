@@ -1,0 +1,31 @@
+@startuml
+
+abstract class Entity {
+    - int x
+    - int y
+    - int width
+    - int height
+}
+
+interface Movable {
+    +void move()
+}
+
+abstract class MovableEntity
+class Player
+abstract class Monster
+abstract class Collectible
+class Gem
+class Magnet
+class Meat
+
+Entity <|-- MovableEntity
+Movable <|.. MovableEntity
+MovableEntity <|-- Monster
+MovableEntity <|-- Player
+Entity <|-- Collectible
+Collectible <|-- Gem
+Collectible <|-- Magnet
+Collectible <|-- Meat
+
+@enduml

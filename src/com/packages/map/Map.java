@@ -1,16 +1,16 @@
 package com.packages.map;
-import com.packages.entities.Entities;
+import com.packages.entity.Entity;
 
 public class Map {
 
 	int sizeX;
 	int sizeY;
-	Entities[][] grid;
+	Entity[][] grid;
 
 	public Map(int sizeX, int sizeY) {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
-		this.grid = new Entities[sizeY][sizeX];
+		this.grid = new Entity[sizeY][sizeX];
 	}
 
 }
