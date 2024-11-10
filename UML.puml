@@ -13,7 +13,9 @@ interface Movable {
 
 abstract class MovableEntity
 class Player
+
 abstract class Competence
+
 abstract class Weapons
 class Shuriken
 class Gun
@@ -33,6 +35,8 @@ class Meat
 abstract class Structure
 class Rock
 class Portal
+class Wall
+
 abstract class Map {
     - Entity entities
 
@@ -53,6 +57,7 @@ Collectible <|-- Meat : is
 Entity <|-- Structure : is
 Structure <|-- Rock : is
 Structure <|-- Portal : is
+Structure <|-- Wall : is
 Player "1" *-- "1" Weapons : has
 Player "1" *-- "0..6" Competence : has
 Weapons <|-- Shuriken : is
