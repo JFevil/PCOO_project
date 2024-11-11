@@ -1,4 +1,6 @@
-package com.packages.entity.movableEntity;
+package com.packages.entity.movableEntity.monster;
+
+import com.packages.entity.movableEntity.MovableEntity;
 
 public class Monster extends MovableEntity {
 
@@ -6,7 +8,8 @@ public class Monster extends MovableEntity {
 		super(x, y, width, height);
 	}
 
-	public void mouv() {
+	@Override
+	public void move() {
 
 	}
 }

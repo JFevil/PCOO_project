@@ -1,4 +1,6 @@
-package com.packages.entity.movableEntity;
+package com.packages.entity.movableEntity.player;
+
+import com.packages.entity.movableEntity.MovableEntity;
 
 public class Player extends MovableEntity {
 
