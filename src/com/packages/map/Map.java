@@ -18,7 +18,7 @@ public class Map {
 
 	public void update() {
         for (Entity entity : this.entities) {
-            
+
         }
 	}
 
