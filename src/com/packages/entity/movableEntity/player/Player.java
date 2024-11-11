@@ -10,8 +10,8 @@ public class Player extends MovableEntity {
 		super(x, y, width, height);
 		this.xp = 0;
 	}
-
-	public void mouv() {
+	@Override
+	public void move() {
 
 	}
 }

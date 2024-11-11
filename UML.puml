@@ -16,11 +16,7 @@ class Player
 
 abstract class Competence
 
-abstract class Weapons
-class Shuriken
 class Gun
-class Bat
-class Sword
 
 abstract class Monster
 class Zombie
@@ -58,11 +54,8 @@ Entity <|-- Structure : is
 Structure <|-- Rock : is
 Structure <|-- Portal : is
 Structure <|-- Wall : is
-Player "1" *-- "1" Weapons : has
+Player "1" *-- "1" Gun : has
 Player "1" *-- "0..6" Competence : has
-Weapons <|-- Shuriken : is
-Weapons <|-- Gun : is
-Weapons <|-- Bat : is
-Weapons <|-- Sword : is
+Competence <|-- Gun : is
 
 @enduml
