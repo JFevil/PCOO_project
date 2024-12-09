@@ -1,0 +1,10 @@
+com.packages
+com.packages.entity
+com.packages.entity.collectible
+com.packages.entity.movableEntity
+com.packages.entity.movableEntity.monster
+com.packages.entity.movableEntity.player
+com.packages.entity.movableEntity.player.competence
+com.packages.entity.movableEntity.player.weapons
+com.packages.entity.structure
+com.packages.map

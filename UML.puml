@@ -1,0 +1,62 @@
+@startuml
+
+abstract class Entity {
+    - int x
+    - int y
+    - int width
+    - int height
+}
+
+interface Movable {
+    +void move()
+}
+
+abstract class MovableEntity
+class Player
+
+abstract class Competence
+
+abstract class Weapons
+class Dag
+class Gun
+class Sword
+
+abstract class Monster
+class Orc
+class Slime
+
+abstract class Collectible
+class Coin
+class Magnet
+class Meat
+
+abstract class Structure
+class Rock
+class Wall
+
+abstract class Map {
+    - Entity entities
+
+}
+
+Map "1" *-- "1..*" Entity : contains
+Entity <|-- MovableEntity : is
+Movable <|.. MovableEntity
+MovableEntity <|-- Monster : is
+Monster <|-- Orc : is
+Monster <|-- Slime : is
+MovableEntity <|-- Player : is
+Entity <|-- Collectible : is
+Collectible <|-- Coin : is
+Collectible <|-- Magnet : is
+Collectible <|-- Meat : is
+Entity <|-- Structure : is
+Structure <|-- Rock : is
+Structure <|-- Wall : is
+Player "1" *-- "0..6" Competence : has
+Player "1" *-- "1" Weapons : has
+Weapons <|-- Dag : is
+Weapons <|-- Gun : is
+Weapons <|-- Sword : is
+
+@enduml
