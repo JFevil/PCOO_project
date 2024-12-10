@@ -1618,4 +1618,5 @@ cutPlayer/tile037.png
 cutPlayer/tile038.png
 cutPlayer/tile039.png
 drop.mp3
+fonts/SuperShiny-0v0rG.ttf
 music.mp3
