@@ -1,4 +1,4 @@
-package com.packages;
+package com.packages.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.packages.Main;
 import com.packages.controller.entity.monster.MonsterController;
 import com.packages.controller.entity.player.PlayerController;
 import com.packages.model.entity.movableEntity.monster.Monster;
