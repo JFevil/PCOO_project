@@ -1,0 +1,6 @@
+# Ignore build files and directories
+lwjgl3/build/
+core/build/
+sujet_projet.txt
+
+*.class
