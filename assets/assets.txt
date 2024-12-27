@@ -1412,6 +1412,7 @@ Vegetables/without_shadow/6.png
 Vegetables/without_shadow/7.png
 Vegetables/without_shadow/8.png
 Vegetables/without_shadow/9.png
+background.png
 craftpix-net-370528-free-medieval-ruins-cartoon-2d-tileset/AI/Cartoon_Medieval_Ruins_ Level_Set.ai
 craftpix-net-370528-free-medieval-ruins-cartoon-2d-tileset/EPS/Cartoon_Medieval_Ruins_ Level_Set_Background - Layer 00.eps
 craftpix-net-370528-free-medieval-ruins-cartoon-2d-tileset/EPS/Cartoon_Medieval_Ruins_ Level_Set_Background - Layer 01.eps

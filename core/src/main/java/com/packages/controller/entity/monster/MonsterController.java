@@ -1,16 +1,28 @@
 package com.packages.controller.entity.monster;
 
+import com.packages.controller.Controller;
 import com.packages.model.entity.movableEntity.monster.Monster;
-import com.packages.model.entity.movableEntity.player.Player;
+import com.packages.view.entity.EntityView;
+import com.packages.view.entity.monster.MonsterView;
 
-public class MonsterController {
-    private Monster monster;
+public class MonsterController implements Controller {
+    private Monster model;
+    private MonsterView view;
 
-    public MonsterController(Monster monster, Player player) {
-        this.monster = monster;
+    public MonsterController(Monster monster, MonsterView monsterView) {
+        this.model = monster;
+        this.view = monsterView;
     }
 
     public void updateMonsterPosition() {
-        monster.move();
+        model.move();
+    }
+
+    public MonsterView getView() {
+        return view;
+    }
+
+    public Monster getModel() {
+        return model;
     }
 }

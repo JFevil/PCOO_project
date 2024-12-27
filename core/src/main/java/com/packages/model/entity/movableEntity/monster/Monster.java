@@ -10,7 +10,7 @@ public class Monster extends MovableEntity {
     private Player player;
     private static int mobCap = 0;
 
-	public Monster(int x, int y, int width, int height, float speed, int health, int damage, Player player) {
+	public Monster(float x, float y, float width, float height, float speed, int health, int damage, Player player) {
 		super(x, y, width, height, speed, health, damage);
         this.player = player;
 	    mobCap++;

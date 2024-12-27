@@ -1,123 +1,175 @@
 package com.packages.view;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.packages.Main;
+import com.packages.InputHandler;
+import com.packages.controller.CameraController;
 import com.packages.controller.entity.monster.MonsterController;
 import com.packages.controller.entity.player.PlayerController;
-import com.packages.model.entity.movableEntity.monster.Monster;
+import com.packages.factory.movableEntity.monster.MonsterFactory;
+import com.packages.factory.movableEntity.monster.Orc1Factory;
 import com.packages.model.entity.movableEntity.player.Player;
-import com.packages.view.entity.monster.MonsterView;
+import com.packages.view.entity.TextureFactory;
 import com.packages.view.entity.player.PlayerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreen implements Screen {
     private final Main game;
-    private boolean isPaused = false;
+    private boolean paused = false;
     private BitmapFont pauseFont;
 
     private SpriteBatch batch;
     private PlayerView playerView;
-    private MonsterView monsterView1;
-    private MonsterView monsterView2;
     private PlayerController playerController;
-    private MonsterController monsterController1;
-    private MonsterController monsterController2;
+    private InputHandler inputHandler;
+    private CameraController cameraController;
+    private List<MonsterController> monsters;
+    private Texture backgroundTexture;
+    private TextureRegion backgroundRegion;
 
     public GameScreen(Main game) {
         this.game = game;
+        monsters = new ArrayList<>();
     }
 
     @Override
     public void show() {
         batch = new SpriteBatch();
 
-        // Initialisation des modèles
+        // Charger la texture de fond
+        backgroundTexture = TextureFactory.getTexture("assets/background.png");
+        backgroundRegion = new TextureRegion(backgroundTexture);
+
+        // Initialize CameraController
+        cameraController = new CameraController(800, 800);
+
+        // Initialize models
         Player player = new Player(400, 400, 100, 100, 300, 50, 10);
-        Monster monster1 = new Monster(300, 300, 100, 100, 100, 50, 5, player);
-        Monster monster2 = new Monster(100, 100, 100, 100, 150, 50, 5, player);
+        playerView = new PlayerView(player, cameraController);
+        playerController = new PlayerController(player, playerView);
 
-        // Initialisation des vues
-        playerView = new PlayerView(player);
-        monsterView1 = new MonsterView(monster1);
-        monsterView2 = new MonsterView(monster2);
+        // Initialize InputHandler
+        inputHandler = new InputHandler(this);
 
-        // Initialisation des contrôleurs
-        playerController = new PlayerController(player);
-        monsterController1 = new MonsterController(monster1, player);
-        monsterController2 = new MonsterController(monster2, player);
+        Orc1Factory orc1Factory = new Orc1Factory(cameraController);
+        MonsterFactory monsterFactory = new MonsterFactory();
 
-        // Police pour l'écran de pause
+        for (int i=0; i<50; i++) {
+            int x = (int) (Math.random() * 800);
+            int y = (int) (Math.random() * 800);
+            int speed = (int) (Math.random() * 100) + 50;
+            addMonster(monsterFactory.createMonster(orc1Factory, x, y, speed, player));
+        }
+
+        // Font for pause screen
         pauseFont = new BitmapFont();
         pauseFont.setColor(Color.YELLOW);
         pauseFont.getData().setScale(2);
     }
 
+    public void addMonster(MonsterController controller) {
+        monsters.add(controller);
+    }
+
+    public void removeMonster(MonsterController controller) {
+        controller.getView().dispose();
+        monsters.remove(controller);
+    }
 
     @Override
     public void render(float delta) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            if (isPaused) {
-                resume(); // Reprendre le jeu
-            } else {
-                pause(); // Mettre en pause
-            }
-        }
-
         ScreenUtils.clear(Color.BLACK);
 
+        cameraController.update(delta);
+        cameraController.follow(playerView.getX()+playerView.getWidth()/2, playerView.getY()+playerView.getHeight()/2);
+
+        batch.setProjectionMatrix(cameraController.getCamera().combined);
         batch.begin();
 
-        if (isPaused) {
-            // Affichage du message de pause
-            pauseFont.draw(batch, "Jeu en pause", 300, 400);
-            pauseFont.draw(batch, "Appuyez sur ECHAP pour reprendre", 200, 350);
-        } else {
-            // Mise à jour et rendu des entités
-            playerController.input();
-            monsterController1.updateMonsterPosition();
-            monsterController2.updateMonsterPosition();
+        drawBackground();
 
+        if (isPaused()) {
+            pauseFont.draw(batch, "Game Paused", 300, 400);
+            pauseFont.draw(batch, "Press ESC to resume", 200, 350);
+        } else {
+            inputHandler.handleInput();
             playerView.render(batch);
-            monsterView1.render(batch);
-            monsterView2.render(batch);
+            for (MonsterController monster : monsters) {
+                monster.updateMonsterPosition();
+                monster.getView().render(batch);
+            }
         }
 
         batch.end();
     }
 
+    public void drawBackground() {
+        // Get the camera's position and zoom
+        float cameraX = cameraController.getCamera().position.x - cameraController.getCamera().viewportWidth / 2;
+        float cameraY = cameraController.getCamera().position.y - cameraController.getCamera().viewportHeight / 2;
+        float zoom = cameraController.getCamera().zoom;
+
+        // Adjust the size of the background tiles based on the zoom level
+        float tileWidth = backgroundRegion.getRegionWidth() * zoom;
+        float tileHeight = backgroundRegion.getRegionHeight() * zoom;
+
+        // Draw the background texture repeatedly considering negative coordinates
+        for (int x = (int) (Math.floor(cameraX / tileWidth) * tileWidth); x < cameraX + cameraController.getCamera().viewportWidth; x += tileWidth) {
+            for (int y = (int) (Math.floor(cameraY / tileHeight) * tileHeight); y < cameraY + cameraController.getCamera().viewportHeight; y += tileHeight) {
+                batch.draw(backgroundRegion, x, y, tileWidth, tileHeight);
+            }
+        }
+    }
+
     @Override
     public void resize(int width, int height) {
-        // Gérer le redimensionnement si nécessaire
+        cameraController.getCamera().viewportWidth = width;
+        cameraController.getCamera().viewportHeight = height;
+        cameraController.getCamera().update();
     }
 
     @Override
     public void pause() {
-        isPaused = true;
-        // Ajoute ici d'autres actions spécifiques si nécessaire
+        paused = true;
     }
 
     @Override
     public void resume() {
-        isPaused = false;
-        // Ajoute ici d'autres actions spécifiques si nécessaire
+        paused = false;
     }
 
     @Override
     public void hide() {
-        // Libérer les ressources si nécessaire lorsque l'écran est caché
     }
 
     @Override
     public void dispose() {
         batch.dispose();
         playerView.dispose();
-        monsterView1.dispose();
-        monsterView2.dispose();
         pauseFont.dispose();
+        backgroundTexture.dispose(); // N'oubliez pas de disposer de la texture de fond
+        for (MonsterController monster : monsters) {
+            monster.getView().dispose();
+        }
+    }
+
+    public Player getPlayer() {
+        return playerController.getPlayer();
+    }
+
+    public CameraController getCameraController() {
+        return cameraController;
+    }
+
+    public boolean isPaused() {
+        return paused;
     }
 }
