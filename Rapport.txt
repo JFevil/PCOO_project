@@ -1,0 +1,47 @@
+Rapport de Projet - Développement d'un Moteur de Jeu 2D avec LibGDX
+
+Equipe et Contributions:
+    - Flèche Jérémy : TOUT
+
+I. Introduction
+    Il s'agit d'un jeu de type "Survivor" en 2D, où le joueur doit survivre le plus longtemps possible face à des ennemis.
+
+II. Présentation du projet
+
+    1. Technologies et Outils utilisés:
+        - LibGDX : pour le développement du moteur de jeu
+        - Tiled : pour la création et la configuration des cartes
+        - IntelliJ IDEA : pour le développement du code
+        - Git : pour la gestion du code source (même si le projet est individuel)
+        - GitHub : pour l'hébergement du code source
+
+    2. Fonctionnalités
+
+        - Gestion des différents écrans (Menu, Jeu, écran de pause)
+
+        - Gestion des entrées clavier
+            * Déplacement du joueur : flèches directionnelles ou ZQSD
+            * Attaque du joueur : clic gauche de la souris
+            * Pause du jeu : touche Echap
+            * Activer/désactiver le mode debug : touche E
+            * Activer/désactiver le mode le viseur du joueur : touche F
+
+        - Gestion des entités
+            * Collision entre les entités
+            * Déplacement des monstres vers le joueur
+
+        - Gestion du rendu
+            * Du joueur
+            * Des monstres
+            * Des rochers
+            * De l'arrière-plan
+            * Gestion de la caméra pour suivre le joueur et possibilité de zoom
+
+    3. Configuration et ajout de contenu avec Tiled
+
+        Tiled a été utilisé pour placer le joueur et les rochers sur la carte. Le joueur a son propre calque "Player" et
+        les rochers ont leur propre calque "Rocks". Pour ajouter un nouveau type de rocher, vous 
+
+    4. Compilation et exécution
+
+        LibGDX est une

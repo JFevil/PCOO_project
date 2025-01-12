@@ -10,17 +10,17 @@ public class Monster extends MovableEntity {
     private Player player;
     private static int mobCap = 0;
 
-	public Monster(float x, float y, float width, float height, float speed, int health, int damage, Player player) {
-		super(x, y, width, height, speed, health, damage);
+    public Monster(float x, float y, float radius, float speed, int health, int damage, Player player) {
+        super(x, y, radius, speed, health, damage);
         this.player = player;
-	    mobCap++;
+        mobCap++;
     }
 
-    public static int getMobCap() {return mobCap;}
-    public static void setMobCap(int mobCap) {Monster.mobCap = mobCap;}
-    public void die () {
+    public static int getMobCap() { return mobCap; }
+    public static void setMobCap(int mobCap) { Monster.mobCap = mobCap; }
+    public void die() {
         setAlive(false);
-        setMobCap(getMobCap()-1);
+        setMobCap(getMobCap() - 1);
     }
 
     public void move() {
@@ -39,5 +39,4 @@ public class Monster extends MovableEntity {
             super.move(dx, dy);
         }
     }
-
 }

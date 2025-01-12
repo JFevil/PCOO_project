@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="100" tileheight="100" infinite="1" nextlayerid="6" nextobjectid="35">
+ <editorsettings>
+  <export target="carte.tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="rock.tsx"/>
+ <tileset firstgid="2" source="player.tsx"/>
+ <objectgroup id="2" name="Rocks">
+  <properties>
+   <property name="type" value="rock"/>
+  </properties>
+  <object id="17" gid="1" x="-87.8333" y="-98.8776" width="64" height="64"/>
+  <object id="29" gid="1" x="177.5" y="22.4557" width="64" height="64"/>
+  <object id="30" gid="1" x="178.667" y="165.333" width="64" height="64"/>
+  <object id="31" gid="1" x="-134.667" y="172" width="64" height="64"/>
+  <object id="32" gid="1" x="46.6667" y="213.333" width="64" height="64"/>
+  <object id="33" gid="1" x="-205.333" y="6.66667" width="64" height="64"/>
+  <object id="34" gid="1" x="73.3333" y="-96" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup id="3" name="Player">
+  <properties>
+   <property name="type" value="player"/>
+  </properties>
+  <object id="2" gid="2" x="-38.6667" y="53.3333" width="100" height="100"/>
+ </objectgroup>
+</map>

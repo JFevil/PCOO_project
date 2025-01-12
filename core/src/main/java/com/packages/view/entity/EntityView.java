@@ -1,66 +1,41 @@
 package com.packages.view.entity;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.packages.GameParameters;
 import com.packages.controller.CameraController;
+import com.packages.model.Model;
 import com.packages.model.entity.Entity;
-import com.packages.utils.Observer;
+import com.packages.view.View;
 
-public abstract class EntityView implements Observer {
+public abstract class EntityView extends View {
 
-    Texture texture;
-    private float x, y, width, height;
-    private ShapeRenderer shapeRenderer;
-    private CameraController cameraController;
+    private float x, y, radius;
 
     public EntityView(String fileName, Entity entity, CameraController cameraController) {
-        this.texture = TextureFactory.getTexture(fileName);
-        this.cameraController = cameraController;
-        entity.addObserver(this);
-        x = entity.getX();
-        y = entity.getY();
-        width = entity.getWidth();
-        height = entity.getHeight();
-        shapeRenderer = new ShapeRenderer();
+        super(fileName, entity, cameraController);
+        this.radius = entity.getRadius();
     }
 
     public void render(SpriteBatch batch) {
-        batch.setProjectionMatrix(cameraController.getCamera().combined);
-        batch.draw(texture, x, y, width, height);
-        if (GameParameters.getInstance().isDebugMode()) {
-            renderDebug();
-        }
+        batch.draw(getTexture(), x - radius*2, y - radius*2, radius * 4, radius * 4);
     }
 
-    public void renderDebug() {
-        shapeRenderer.setProjectionMatrix(cameraController.getCamera().combined);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+    public void renderHitbox(ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(Color.RED);
-        shapeRenderer.rect(x, y, width, height);
-        shapeRenderer.end();
+        shapeRenderer.circle(x, y, radius);
     }
 
-    public void dispose() {
-        shapeRenderer.dispose();
+    public void update(Model model) {
+        this.x = ((Entity)model).getX();
+        this.y = ((Entity)model).getY();
     }
 
-    @Override
-    public void update(Entity entity) {
-        setX(entity.getX());
-        setY(entity.getY());
-        setWidth(entity.getWidth());
-        setHeight(entity.getHeight());
-    }
+    public float getX() { return x; }
+    public float getY() { return y; }
+    public float getRadius() { return radius; }
 
-    public float getX() { return x;}
-    public float getY() { return y;}
-    public float getWidth() { return width;}
-    public float getHeight() { return height;}
-    public void setX(float x) {this.x = x;}
-    public void setY(float y) {this.y = y;}
-    public void setWidth(float width) {this.width = width;}
-    public void setHeight(float height) {this.height = height;}
+    public void setX(float x) { this.x = x; }
+    public void setY(float y) { this.y = y; }
+    public void setRadius(float radius) { this.radius = radius; }
 }

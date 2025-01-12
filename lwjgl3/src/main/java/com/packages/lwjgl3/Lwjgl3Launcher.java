@@ -18,9 +18,10 @@ public class Lwjgl3Launcher {
     private static Lwjgl3ApplicationConfiguration getDefaultConfiguration() {
         Lwjgl3ApplicationConfiguration configuration = new Lwjgl3ApplicationConfiguration();
         configuration.setTitle("GAME");
-        configuration.useVsync(true);
-        configuration.setForegroundFPS(Lwjgl3ApplicationConfiguration.getDisplayMode().refreshRate + 1);
-        configuration.setWindowedMode(800, 800); // this line changes the size of the window
+        configuration.useVsync(false); // Setting to false disables vertical sync
+        configuration.setForegroundFPS(120); // Set FPS to 60
+        configuration.setWindowedMode(1920, 1080); // this line changes the size of the window
+        configuration.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
         configuration.setWindowIcon("libgdx128.png", "libgdx64.png", "libgdx32.png", "libgdx16.png");
 
         return configuration;

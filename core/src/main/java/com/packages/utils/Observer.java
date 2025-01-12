@@ -1,7 +1,7 @@
 package com.packages.utils;
 
-import com.packages.model.entity.Entity;
+import com.packages.model.Model;
 
 public interface Observer {
-    void update(Entity entity);
+    void update(Model model);
 }
