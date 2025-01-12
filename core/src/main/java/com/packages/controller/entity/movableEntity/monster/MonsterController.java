@@ -9,7 +9,6 @@ public class MonsterController extends Controller {
     public MonsterController(Monster monster, MonsterView monsterView) {
         super(monster, monsterView);
     }
-
     public void updateMonsterPosition() {
         ((Monster)getModel()).move();
     }

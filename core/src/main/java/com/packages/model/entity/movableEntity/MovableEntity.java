@@ -29,6 +29,10 @@ public abstract class MovableEntity extends Entity {
         notifyObservers();
     }
 
+    public void die() {
+        setAlive(false);
+    }
+
     public float getSpeed() { return speed; }
     public void setSpeed(float speed) { this.speed = speed; }
     public int getHealth() { return health; }

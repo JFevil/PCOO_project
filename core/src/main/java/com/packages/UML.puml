@@ -1,71 +1,156 @@
 @startuml
 
+abstract class Controller {
+    - Model model
+    - View view
+}
+
+abstract class Model {
+    - List<Observer> observers
+}
+
+abstract class View {
+    - Texture texture
+    - CameraController cameraController
+}
+
+interface Observer {
+    + void update(Model model)
+}
+
+interface Observable {
+    + void addObserver(Observer observer)
+    + void removeObserver(Observer observer)
+    + void notifyObservers()
+}
+
 abstract class Entity {
-    - int x
-    - int y
-    - int width
-    - int height
+    - Circle hitbox
+    + boolean collidesWith(Entity other)
+    + void applyCollisionForce(Entity other)
 }
 
-interface Movable {
-    +void move()
-}
-
-interface Updatable {
-    +void update()
-}
-
-abstract class MovableEntity
-class Player
-
-abstract class Competence
-
-abstract class Weapons
-class Dag
-class Gun
-class Sword
-
-abstract class Monster
-class Zombie
-class Ghost
-class Dragon
-
-abstract class Collectible
-class Gem
-class Magnet
-class Meat
-
-abstract class Structure
 class Rock
-class Portal
-class Wall
 
-abstract class Map {
-    - Entity entities
-
+abstract class MovableEntity {
+    - float speed
+    - int health
+    - int damage
+    - boolean alive
+    - float reach
+    + void move(float dx, float dy)
+    + void takeDamage(int damage)
+    + void die()
 }
 
-Map "1" *-- "1..*" Entity : contains
-Entity <|-- MovableEntity : is
-Updatable <|.. Entity : is
-Movable <|.. MovableEntity : is
-MovableEntity <|-- Monster : is
-Monster <|-- Zombie : is
-Monster <|-- Ghost : is
-Monster <|-- Dragon : is
-MovableEntity <|-- Player : is
-Entity <|-- Collectible : is
-Collectible <|-- Gem : is
-Collectible <|-- Magnet : is
-Collectible <|-- Meat : is
-Entity <|-- Structure : is
-Structure <|-- Rock : is
-Structure <|-- Portal : is
-Structure <|-- Wall : is
-Player "1" *-- "0..6" Competence : has
-Player "1" *-- "1" Weapons : has
-Weapons <|-- Dag : is
-Weapons <|-- Gun : is
-Weapons <|-- Sword : is
+class Monster {
+    - Player player
+    - static int mobcap
+}
+
+class Player {
+    - int exp
+    - int[] aim
+    - BallFactory ballFactory
+    - List<BallController> balls
+    + void shoot()
+}
+
+class Ball {
+    - fianl int[] startingPosition
+    - int[] position
+    - float maxDistance
+    + boolean validDistance()
+}
+
+class MonsterController {
+    + void updateMonsterPosition()
+}
+
+abstract class EntityView {
+    - float x
+    - float y
+    - float radius
+    + void render(SpriteBatch batch)
+    + void renderHitbox(ShapeRenderer shapeRenderer)
+}
+
+class RockView
+class MonsterView
+class Orc1View
+class PlayerView {
+    - int[] aim
+}
+class BallView
+
+class PlayerController
+class BallController
+class RockController
+
+interface MonsterFactory {
+    + MonsterView createView(Monster monster)
+    + Monser createModel(float x, float y, float speed, Player player)
+    + MonsterController createController(Monster monster, MonsterView monsterView)
+}
+
+class MonsterSpawner {
+    - static MonsterController createMonster(MonsterFactory monsterFactory, float x, float y, float speed, Player player)
+}
+
+class Orc1MonsterFactory {
+    - CameraController cameraController
+}
+
+interface ProjectileFactory {
+    + BallView createView(Ball ball)
+    + Ball createModel(float x, float y, float size, float speed, int damage, float maxDistance, int directionX, int directionY)
+    + BallController createController(Ball ball, BallView ballView)
+}
+
+class ProjectileShooter {
+    - static BallController createProjectile(ProjectileFactory projectileFactory, float x, float y, float size, float speed, int damage, float maxDistance, int directionX, int directionY)
+}
+
+class BallFactory {
+    - CameraController cameraController
+}
+
+Observable <|.. Model
+Controller o-- Model
+Model <|-- Entity
+Entity <|-- Rock
+Model --> "1..*" Observer : observers
+Entity <|-- MovableEntity
+MovableEntity <|-- Ball
+MovableEntity <|-- Monster
+MovableEntity <|-- Player
+Monster --> Player
+
+Observer <|.. View
+View <|-- EntityView
+EntityView <|-- RockView
+EntityView <|-- MonsterView
+MonsterView <|-- Orc1View
+EntityView <|-- PlayerView
+EntityView <|-- BallView
+
+Controller o-- View
+Controller <|-- MonsterController
+Controller <|-- PlayerController
+Controller <|-- BallController
+Controller <|-- RockController
+
+MonsterFactory --> "1" MonsterView : createView
+MonsterFactory --> "1" Monster : createModel
+MonsterFactory --> "1" MonsterController : createController
+MonsterSpawner --> "1" MonsterController : createMonster
+MonsterFactory <|.. Orc1MonsterFactory
+
+ProjectileFactory --> "1" BallView : createView
+ProjectileFactory --> "1" Ball : createModel
+ProjectileFactory --> "1" BallController : createController
+ProjectileShooter --> "1" BallController : createProjectile
+BallFactory <|.. ProjectileFactory
+
 
 @enduml

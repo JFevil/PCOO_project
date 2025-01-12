@@ -6,7 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector3;
 import com.packages.controller.CameraController;
 import com.packages.model.entity.movableEntity.player.Player;
-import com.packages.view.GameScreen;
+import com.packages.GameScreen;
 
 import java.util.HashSet;
 import java.util.Set;

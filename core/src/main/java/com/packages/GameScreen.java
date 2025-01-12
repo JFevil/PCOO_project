@@ -1,4 +1,4 @@
-package com.packages.view;
+package com.packages;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,9 +12,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.packages.GameMap;
+import com.packages.utils.GameMap;
 import com.packages.utils.GameParameters;
-import com.packages.Main;
 import com.packages.utils.InputHandler;
 import com.packages.controller.CameraController;
 import com.packages.controller.Controller;
@@ -28,6 +27,8 @@ import com.packages.model.entity.movableEntity.monster.Monster;
 import com.packages.model.entity.movableEntity.player.Player;
 import com.packages.model.entity.structure.Rock;
 import com.packages.utils.Grid;
+import com.packages.utils.TextureFactory;
+import com.packages.view.GameUI;
 import com.packages.view.entity.RockView;
 import com.packages.view.entity.movableEntity.monster.MonsterView;
 import com.packages.view.entity.movableEntity.player.PlayerView;

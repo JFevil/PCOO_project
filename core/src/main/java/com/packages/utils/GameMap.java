@@ -1,4 +1,4 @@
-package com.packages;
+package com.packages.utils;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;

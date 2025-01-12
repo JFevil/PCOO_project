@@ -18,8 +18,10 @@ public class Monster extends MovableEntity {
 
     public static int getMobCap() { return mobCap; }
     public static void setMobCap(int mobCap) { Monster.mobCap = mobCap; }
+
+    @Override
     public void die() {
-        setAlive(false);
+        super.die();
         setMobCap(getMobCap() - 1);
     }
 

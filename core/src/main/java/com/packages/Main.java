@@ -3,9 +3,6 @@ package com.packages;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.packages.utils.GameParameters;
-import com.packages.view.MenuScreen;
-import com.packages.view.GameScreen;
-import com.packages.view.PauseMenu;
 
 public class Main extends Game {
     private Screen menuScreen;

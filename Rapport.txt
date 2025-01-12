@@ -1,10 +1,14 @@
 Rapport de Projet - Développement d'un Moteur de Jeu 2D avec LibGDX
 
 Equipe et Contributions:
-    - Flèche Jérémy : TOUT
+    - Flèche Jérémy (seul)
+
+Lien du dépôt GitHub: https://github.com/JFevil/PCOO_project
 
 I. Introduction
-    Il s'agit d'un jeu de type "Survivor" en 2D, où le joueur doit survivre le plus longtemps possible face à des ennemis.
+    Il s'agit d'un jeu de type "Survivor" en 2D, où le joueur doit survivre le plus longtemps possible face à des
+    ennemis (objectif initial). Entre les fêtes et les examens, j'ai eu du mal à trouver du temps pour travailler sur le projet.
+    Il n'est donc pas terminé. J'ai seulement les fonctionnalités de base pour un jeu de type "Survivor" en 2D (voir la section Fonctionnalités).
 
 II. Présentation du projet
 
@@ -27,7 +31,8 @@ II. Présentation du projet
             * Activer/désactiver le mode le viseur du joueur : touche F
 
         - Gestion des entités
-            * Collision entre les entités
+            * Collision entre les entités de manière optimisée : utilisation d'une grille en checkant uniquement les
+              entités proches
             * Déplacement des monstres vers le joueur
 
         - Gestion du rendu
@@ -40,8 +45,52 @@ II. Présentation du projet
     3. Configuration et ajout de contenu avec Tiled
 
         Tiled a été utilisé pour placer le joueur et les rochers sur la carte. Le joueur a son propre calque "Player" et
-        les rochers ont leur propre calque "Rocks". Pour ajouter un nouveau type de rocher, vous 
+        les rochers ont leur propre calque "Rocks". Vous pouvez ajouter, les déplacer les élements sur la carte et les
+        exporter en format .tmx pour les charger dans le jeu. Le mieux pour coller à mon implémentation est de dupliquer
+        fichier .tmx de base et de le modifier.
 
     4. Compilation et exécution
 
-        LibGDX est une
+        LibGDX est un outil pratique pour créer un moteur de jeu. Pour compiler et exécuter le jeu, il suffit de lancer
+        la classe lwjgl3/src/main/java/com/packages/lwjgl3/Lwjgl3Launcher.java directement depuis IntelliJ IDEA (LibGDX
+        utilise Gradle pour gérer les dépendances).
+
+III Présentation technique du projet
+
+    1. Architecture du projet
+
+        L'UML du projet est disponible dans le fichier UML/UML.pdf. (J'ai choisi de ne pas ajouter les classes d'écran
+        et les utilitaires car il était déjà assez grand comme ça).
+
+        Tous mes fichiers sources se trouvent dans le dossier core/src/main/java/com/packages.
+        Le jeu implémenté utilise le
+        Le projet est divisé en plusieurs packages:
+            - Model : contient tous les modèles
+            - View : contient toutes les vues
+            - Controller : contient tous les contrôleurs
+            - Utils : contient des classes utilitaires
+            - abstract Factory : contient les classes abstraites pour les factories
+
+        J'ai utilisé quelques design patterns pour structurer mon code:
+            - MVC (Model-View-Controller) + Observer : pour séparer les données, la logique et l'affichage
+            - Factory : pour créer les contrôleurs de manière dynamique
+            - Flyweight : pour optimiser la gestion des textures des View
+            - Singleton : pour les paramètres du jeu (GameParameters)
+
+    2. Utiliser et étendre la libraire du moteur de jeu
+
+        Evidement comme le projet n'a pas pu être terminé, on peut implémenter la logique d'apparition des monstres, la gestion
+        des points de vies du joueur, etc.
+
+        Grace à l'utilisation d'abstract factory, il est facile d'ajouter de nouveaux types de monstres, de rochers, etc.
+
+IV Conclusion
+
+    Le projet n'est pas terminé, mais il est fonctionnel. Il est possible de se déplacer, de mettre en pause, d'observer
+    les différentes collisions, etc. Il est possible de continuer à travailler sur ce projet pour ajouter de nouvelles fonctionnalités
+    et améliorer les fonctionnalités existantes. Par exemple, on pourrait ajouter des armes, des compétences, des niveaux, etc.
+    Il reste encore beaucoup de travail à faire pour avoir un jeu complet et intéressant. J'ai appris beaucoup de choses en travaillant
+    sur ce projet, notamment sur la gestion des entités et des collisions. J'espère pouvoir continuer à travailler dessus et à l'améliorer
+    dans le futur.
+
+    Merci pour votre attention.

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.packages.controller.CameraController;
 import com.packages.model.Model;
 import com.packages.utils.Observer;
+import com.packages.utils.TextureFactory;
 
 public abstract class View implements Observer {
 
