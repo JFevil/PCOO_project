@@ -49,9 +49,9 @@ public class InputHandler implements InputProcessor {
 
         player.move(dx, dy);
 
-        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-            player.shoot();
-        }
+//        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+//            player.shoot();
+//        }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             GameParameters.getInstance().setShowHitbox(!GameParameters.getInstance().isShowHitbox());
